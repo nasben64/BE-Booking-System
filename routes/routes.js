@@ -1,5 +1,6 @@
 const express = require("express");
 const Model = require("../models/model");
+const Appointments = require("../models/appointments");
 const router = express.Router();
 module.exports = router;
 //Post Method
@@ -20,7 +21,7 @@ router.post("/post", async (req, res) => {
 router.get("/getAll", async (req, res) => {
   // res.send("Get All API");
   try {
-    const data = await Model.find();
+    const data = await Appointments.find();
     res.json(data);
   } catch (error) {
     res.status(500).json({ message: error.message });
