@@ -1,17 +1,7 @@
-const mongoose = require("mongoose");
-const appointmentSchema = new mongoose.Schema({
-  date: {
-    required: true,
-    type: Date,
-  },
-  time: {
-    required: true,
-    type: String,
-  },
-  username: {
-    required: false,
-    type: String,
-  },
-});
+// const database = require("../schema/connection.js");
+const Appointments = require("../schema/appointments");
 
-module.exports = mongoose.model("Appointments", appointmentSchema);
+exports.selectAppointments = async (req, res) => {
+  const data = await Appointments.find();
+  res.json(data);
+};

@@ -1,9 +1,10 @@
 const express = require("express");
-const Model = require("../models/model");
-const Appointments = require("../models/appointments");
-const Users = require("../models/users.js");
+const Model = require("../schema/model");
+const Appointments = require("../schema/appointments");
+const Users = require("../schema/users.js");
 const router = express.Router();
 module.exports = router;
+
 //Post Method
 router.post("/post", async (req, res) => {
   // res.send("Post API");
@@ -18,16 +19,17 @@ router.post("/post", async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
+
 //Get all appointments
-router.get("/appointments", async (req, res) => {
-  // res.send("Get All API");
-  try {
-    const data = await Appointments.find();
-    res.json(data);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+// router.get("/appointments", async (req, res) => {
+//   // res.send("Get All API");
+//   try {
+//     const data = await Appointments.find();
+//     res.json(data);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// });
 //Get all users
 router.get("/users", async (req, res) => {
   try {
