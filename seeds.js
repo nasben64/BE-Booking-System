@@ -2,18 +2,19 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const Appointments = require("./models/appointments.js");
 const Users = require("./models/users.js");
+const database = require("./connection.js");
 
-const mongoString = process.env.DATABASE_URL;
-mongoose.connect(mongoString);
-const database = mongoose.connection;
+// const mongoString = process.env.DATABASE_URL;
+// mongoose.connect(mongoString);
+// const database = mongoose.connection;
 
-database.on("error", (error) => {
-  console.log(error);
-});
+// database.on("error", (error) => {
+//   console.log(error);
+// });
 
-database.once("connected", () => {
-  console.log("database connected...");
-});
+// database.once("connected", () => {
+//   console.log("database connected...");
+// });
 
 const seedAppointments = [
   {
@@ -120,6 +121,8 @@ const seedDB = async () => {
   await Users.insertMany(seedUsers);
 };
 
-seedDB().then(() => {
-  mongoose.connection.close();
-});
+// seedDB().then(() => {
+//   mongoose.connection.close();
+// });
+
+module.exports = seedDB;
