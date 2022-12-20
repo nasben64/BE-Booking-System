@@ -1,7 +1,7 @@
 const express = require("express");
-const Model = require("../schema/model");
-const Appointments = require("../schema/appointments");
-const Users = require("../schema/users.js");
+// const Model = require("../schema/model");
+const Appointments = require("../models/appointments");
+const Users = require("../models/users.js");
 const router = express.Router();
 module.exports = router;
 
