@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
-const Appointments = require("./schema/appointments.js");
-const Users = require("./schema/users.js");
+const Appointments = require("./models/appointments.js");
+const Users = require("./models/users.js");
 
 const mongoString = process.env.DATABASE_URL;
 mongoose.connect(mongoString);
