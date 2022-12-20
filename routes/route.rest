@@ -22,3 +22,22 @@ Content-Type: application/json
     "available": true
 }
 ###
+
+POST http://localhost:3000/api/users/
+Content-Type: application/json
+
+{
+    "firstName": "test1",
+    "lastName": "lastname",
+    "email": "test@yahoo.com",
+    "username": "nas2",
+    "password": "12345"
+}
+###
+
+POST http://localhost:3000/api/users/gs
+Content-Type: application/json
+
+{
+    "password": "password"
+}
