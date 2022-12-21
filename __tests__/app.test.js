@@ -14,7 +14,7 @@ afterAll(async () => {
 });
 
 describe("GET /api/appointments/", () => {
-  test("200: returns all appointments", () => {
+  test("200: returns a count of available appointments per day", () => {
     return request(app)
       .get("/api/appointments/")
       .expect(200)
@@ -22,8 +22,8 @@ describe("GET /api/appointments/", () => {
         // console.log(body);
         body.appointments.forEach((appointment) => {
           expect(appointment).toMatchObject({
-            date: expect.any(String),
-            time: expect.any(String),
+            _id: expect.any(String),
+            count: expect.any(Number),
           });
         });
       });
