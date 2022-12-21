@@ -3,6 +3,7 @@ const request = require("supertest");
 const app = require("../app.js");
 const database = require("../connection");
 const seed = require("../seeds.js");
+const Appointments = require("../models/appointments");
 
 beforeEach(() => {
   // console.log(seed);
@@ -135,6 +136,60 @@ describe("POST /api/users/:username", () => {
       .expect(404)
       .then(({ body }) => {
         expect(body.msg).toBe("incorrect username or password");
+      });
+  });
+});
+
+describe("GET: /api/appointments/:date", () => {
+  test("200: return all the slots for the passed date", () => {
+    return request(app)
+      .get("/api/appointments/2022-12-24")
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.appointments[0]).toMatchObject({
+          date: new Date("2022-12-24").toISOString(),
+          time: expect.any(String),
+          _id: expect.any(String),
+        });
+      });
+  });
+  test("404: return an error when passed unavailable date", () => {
+    return request(app)
+      .get("/api/appointments/2023-02-24")
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Date is not available");
+      });
+  });
+});
+
+describe("PATCH: /api/appintments/:appointment_id", () => {
+  test("201: book the appointment for the passed appointment_id and username", async () => {
+    const user = {
+      username: "nb",
+    };
+
+    const { _id } = await Appointments.findOne();
+    console.log("appointment id", _id);
+
+    return request(app)
+      .patch(`/api/appointments/${_id}`)
+      .send(user)
+      .expect(201)
+      .then(({ body }) => {
+        expect(body.appointment.acknowledged).toBe(true);
+      });
+  });
+  test("404: returns unable to book appointment when passed invalid appointment id", () => {
+    const user = {
+      username: "nb",
+    };
+    return request(app)
+      .patch("/api/appointments/63a329a87b030983ede54fb3")
+      .send(user)
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe("unable to book appointment");
       });
   });
 });

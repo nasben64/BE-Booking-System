@@ -15,7 +15,10 @@ const createAppointments = () => {
 
     for (let j = 0; j < 8; j++) {
       const appointmentData = {};
-      const timeSlot = 9 + j;
+      let timeSlot = 9 + j;
+      if (timeSlot.toString().length === 1) {
+        timeSlot = `0${timeSlot}`;
+      }
       const timeSlotString = `${timeSlot}:00`;
       appointmentData.date = nextDay;
       appointmentData.time = timeSlotString;

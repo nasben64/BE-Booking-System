@@ -1,6 +1,10 @@
 const express = require("express");
 const routes = require("./routes/routes.js");
-const { getAppointments } = require("./controllers/appointments");
+const {
+  getAppointments,
+  getAppointmentsByDate,
+  patchAppointment,
+} = require("./controllers/appointments");
 const database = require("./connection.js");
 const {
   getUsers,
@@ -17,6 +21,8 @@ app.get("/api/appointments", getAppointments);
 app.get("/api/users", getUsers);
 app.post("/api/users", createUser);
 app.post("/api/users/:username", validateUser);
+app.get("/api/appointments/:date", getAppointmentsByDate);
+app.patch("/api/appointments/:appointment_id", patchAppointment);
 
 app.use((req, res, next) => {
   //   console.log("inside error");

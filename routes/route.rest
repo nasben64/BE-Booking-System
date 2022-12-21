@@ -35,9 +35,20 @@ Content-Type: application/json
 }
 ###
 
+GET http://localhost:3000/api/appointments/2022-12-24
+###
+
 POST http://localhost:3000/api/users/gs
 Content-Type: application/json
 
 {
     "password": "password"
+}
+
+###
+PATCH  http://localhost:3000/api/appointments/63a330f0d9b6904bcf8df3e6
+Content-Type: application/json
+
+{
+    "username": "nb"
 }
