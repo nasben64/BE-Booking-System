@@ -47,10 +47,18 @@ Content-Type: application/json
 GET http://localhost:3000/api/appointments/
 
 ###
-PATCH  http://localhost:3000/api/appointments/63a4232f9d1e6e72c48419e9
+PATCH  http://localhost:3000/api/appointments/63a4232f9d1e6e72c48419f0
 Content-Type: application/json
 
 {
     "username": "nb",
     "available": 0
+}
+
+###
+POST http://localhost:3000/api/payment
+Content-Type: application/json
+
+{
+    
 }

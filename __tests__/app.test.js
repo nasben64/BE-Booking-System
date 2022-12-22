@@ -193,3 +193,27 @@ describe("PATCH: /api/appintments/:appointment_id", () => {
       });
   });
 });
+
+describe.only("POST: /api/payment", () => {
+  test("should return the client_secret id", () => {
+    const user = {};
+    return request(app)
+      .post("/api/payment")
+      .send(user)
+      .expect(200)
+      .then(({ body }) => {
+        console.log(body);
+        expect(body.message).toBe("Payment initiated");
+      });
+  });
+  test("should return an error message when passed the wrong endpoint", () => {
+    const user = {};
+    return request(app)
+      .post("/api/payments")
+      .send(user)
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe("path not found");
+      });
+  });
+});

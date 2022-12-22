@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const routes = require("./routes/routes.js");
 const {
   getAppointments,
@@ -11,8 +12,10 @@ const {
   createUser,
   validateUser,
 } = require("./controllers/users.js");
+const { stripePayment } = require("./controllers/stripe.js");
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 // app.use("/api", routes);
@@ -23,6 +26,7 @@ app.post("/api/users", createUser);
 app.post("/api/users/:username", validateUser);
 app.get("/api/appointments/:date", getAppointmentsByDate);
 app.patch("/api/appointments/:appointment_id", patchAppointment);
+app.post("/api/payment", stripePayment);
 
 app.use((req, res, next) => {
   //   console.log("inside error");
