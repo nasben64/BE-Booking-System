@@ -22,6 +22,7 @@ const createAppointments = () => {
       const timeSlotString = `${timeSlot}:00`;
       appointmentData.date = nextDay;
       appointmentData.time = timeSlotString;
+      appointmentData.available = 1;
       appointmentArray.push(appointmentData);
     }
   }
