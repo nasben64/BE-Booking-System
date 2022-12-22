@@ -167,17 +167,17 @@ describe("PATCH: /api/appintments/:appointment_id", () => {
   test("201: book the appointment for the passed appointment_id and username", async () => {
     const user = {
       username: "nb",
+      available: 0,
     };
 
     const { _id } = await Appointments.findOne();
-    console.log("appointment id", _id);
 
     return request(app)
       .patch(`/api/appointments/${_id}`)
       .send(user)
       .expect(201)
       .then(({ body }) => {
-        expect(body.appointment.acknowledged).toBe(true);
+        expect(body.appointment.available).toBe(0);
       });
   });
   test("404: returns unable to book appointment when passed invalid appointment id", () => {

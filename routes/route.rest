@@ -7,8 +7,7 @@ Content-Type: application/json
 }
 ###
 GET http://localhost:3000/api/getAll/
-###
-GET http://localhost:3000/api/appointments/
+
 ###
 GET http://localhost:3000/api/users/
 ###
@@ -44,11 +43,14 @@ Content-Type: application/json
 {
     "password": "password"
 }
+###
+GET http://localhost:3000/api/appointments/
 
 ###
-PATCH  http://localhost:3000/api/appointments/63a330f0d9b6904bcf8df3e6
+PATCH  http://localhost:3000/api/appointments/63a4232f9d1e6e72c48419e9
 Content-Type: application/json
 
 {
-    "username": "nb"
+    "username": "nb",
+    "available": 0
 }

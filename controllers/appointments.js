@@ -8,8 +8,8 @@ exports.getAppointments = async (req, res, next) => {
   try {
     const appointments = await Appointments.aggregate([
       { $match: { date: { $gte: today } } },
-      { $match: { username: { $exists: false } } },
-      { $group: { _id: "$date", count: { $sum: 1 } } },
+      // { $match: { username: { $exists: false } } },
+      { $group: { _id: "$date", count: { $sum: "$available" } } },
       { $sort: { _id: 1 } },
     ]);
     res.status(200).send({ appointments });
@@ -36,16 +36,37 @@ exports.getAppointmentsByDate = async (req, res, next) => {
   }
 };
 
+// exports.patchAppointment = async (req, res, next) => {
+//   const { appointment_id } = req.params;
+//   const { username } = req.body;
+
+//   try {
+//     const appointment = await Appointments.updateOne(
+//       { _id: appointment_id },
+//       { $set: { username: username } }
+//     );
+//     if (appointment.modifiedCount === 1) {
+//       res.status(201).send({ appointment });
+//     } else {
+//       res.status(404).send({ msg: "unable to book appointment" });
+//     }
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
 exports.patchAppointment = async (req, res, next) => {
   const { appointment_id } = req.params;
-  const { username } = req.body;
-
   try {
-    const appointment = await Appointments.updateOne(
+    const appointment = await Appointments.findByIdAndUpdate(
       { _id: appointment_id },
-      { $set: { username: username } }
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
     );
-    if (appointment.modifiedCount === 1) {
+    if (appointment) {
       res.status(201).send({ appointment });
     } else {
       res.status(404).send({ msg: "unable to book appointment" });

@@ -12,6 +12,10 @@ const appointmentSchema = new mongoose.Schema({
     required: false,
     type: String,
   },
+  available: {
+    required: true,
+    type: Number,
+  },
 });
 
 module.exports = mongoose.model("Appointments", appointmentSchema);
