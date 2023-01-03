@@ -5,6 +5,7 @@ const {
   getAppointments,
   getAppointmentsByDate,
   patchAppointment,
+  getAppointmentsByusername,
 } = require("./controllers/appointments");
 const database = require("./connection.js");
 const {
@@ -27,6 +28,7 @@ app.post("/api/users/:username", validateUser);
 app.get("/api/appointments/:date", getAppointmentsByDate);
 app.patch("/api/appointments/:appointment_id", patchAppointment);
 app.post("/api/payment", stripePayment);
+app.get("/api/bookedAppointments/:username", getAppointmentsByusername);
 
 app.use((req, res, next) => {
   //   console.log("inside error");

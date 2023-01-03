@@ -34,7 +34,7 @@ Content-Type: application/json
 }
 ###
 
-GET http://localhost:3000/api/appointments/2022-12-24
+GET http://localhost:3000/api/appointments/2022-12-29
 ###
 
 POST http://localhost:3000/api/users/gs
@@ -62,3 +62,7 @@ Content-Type: application/json
 {
     
 }
+
+###
+
+GET http://localhost:3000/api/bookedAppointments/nb

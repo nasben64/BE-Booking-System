@@ -36,6 +36,26 @@ exports.getAppointmentsByDate = async (req, res, next) => {
   }
 };
 
+exports.getAppointmentsByusername = async (req, res, next) => {
+  const { username } = req.params;
+
+  try {
+    const appointments = await Appointments.find({
+      username: { $eq: username },
+    }).sort({ date: 1 });
+
+    if (appointments.length > 0) {
+      res.status(200).send({ appointments });
+    } else {
+      res
+        .status(404)
+        .send({ msg: `No available appointments for ${username}` });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 // exports.patchAppointment = async (req, res, next) => {
 //   const { appointment_id } = req.params;
 //   const { username } = req.body;
